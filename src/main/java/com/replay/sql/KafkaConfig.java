@@ -22,6 +22,7 @@ public class KafkaConfig implements InitializingBean {
     public static final String CONSUMER = "consumer";
     public static final String PRODUCER = "producer";
     public static final String TOPIC_PREFIX = "test-sql-replay_";
+    private static final String AUTO_COMMIT_INTERVAL_MS = "100";
     @Value("${sql.replay.kafka.brokers}")
     private String brokers;
     @Value("${sql.replay.client.type:}")
@@ -39,7 +40,7 @@ public class KafkaConfig implements InitializingBean {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, brokers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "test_sql_replay");
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "100");
+        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, AUTO_COMMIT_INTERVAL_MS);
         props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "15000");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
